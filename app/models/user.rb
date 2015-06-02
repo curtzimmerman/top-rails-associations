@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-	has_many :hosted_events, class_name: "Event", foreign_key: "host_id"
+	has_many :hosted_events, class_name: "Event", foreign_key: "host_id", dependent: :destroy
 	has_many :attended_events, through: :rosters, foreign_key: "attended_event_id"
 	has_many :rosters, foreign_key: "attendee_id"
 
@@ -15,5 +15,14 @@ class User < ActiveRecord::Base
 		cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST : BCrypt::Engine.cost
 		BCrypt::Password.create(plaintext, cost: cost)
 	end
+
+	def upcoming_events
+		attended_events.where(['start_time > ?', DateTime.now])
+	end
+
+	def previous_events
+		attended_events.where(['start_time < ?', DateTime.now])
+	end
+
 
 end

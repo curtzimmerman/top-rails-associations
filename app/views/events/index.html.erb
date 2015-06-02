@@ -1,0 +1,21 @@
+<% provide(:title, "All Events") %>
+<h1>All Events</h1>
+<table>
+	<tr>
+		<th>Event</th>
+		<th>Host</th>
+		<th>Time</th>
+	</tr>
+	<% @events.each do |event| %>
+		<tr>
+			<td>
+				<%= link_to event.name, event_path(event.id) %>
+			</td>
+			<td>
+				<%= link_to event.host.name, user_path(event.host_id) %>
+			</td>
+			<td>
+				<%= event.start_time %>
+			</td>
+		</tr>
+	<% end %>

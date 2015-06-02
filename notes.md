@@ -15,3 +15,8 @@ create new user
 	new user view
 		form helper
 	new user controller
+
+session controller
+	login -> sessions#new
+	post information to session#create
+		attempt to authenticate
