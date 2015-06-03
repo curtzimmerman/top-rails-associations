@@ -8,7 +8,9 @@
 <h3><%= link_to "Create a new event...", new_event_path %></h3>
 
 <h1>Events <%= @user.name %> is attending</h1>
-<% @upcoming_events.each do |event| %>
-	<%= link_to event.name, event_path(event) %>|
-	<%= event.start_date %>
-<% end %>
+<ul>
+	<% @upcoming_events.each do |event| %>
+		<li><%= link_to event.name, event_path(event) %> |
+		<%= event.start_time.to_formatted_s(:long) %></li>
+	<% end %>
+</ul>

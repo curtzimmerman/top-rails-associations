@@ -15,7 +15,8 @@
 				<%= link_to event.host.name, user_path(event.host_id) %>
 			</td>
 			<td>
-				<%= event.start_time %>
+				<%= event.start_time.to_formatted_s(:long) %>
 			</td>
 		</tr>
 	<% end %>
+</table>

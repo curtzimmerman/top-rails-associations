@@ -20,3 +20,8 @@ session controller
 	login -> sessions#new
 	post information to session#create
 		attempt to authenticate
+
+
+get event
+add user to event.attendees #which is a collection of users
+	shovel user into attendees #user must be a user variable

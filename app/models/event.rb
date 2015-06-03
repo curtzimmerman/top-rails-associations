@@ -3,4 +3,7 @@ class Event < ActiveRecord::Base
 	has_many :attendees, through: :rosters, foreign_key: "attendee_id"
 	has_many :rosters, foreign_key: "attended_event_id"
 
+	def add_attendee(user)
+		attendees << user
+	end
 end

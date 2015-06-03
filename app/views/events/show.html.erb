@@ -3,11 +3,14 @@
 <h1><%= @event.name %></h1>
 <h2><%= @event.start_time.to_formatted_s(:long) %></h2>
 <h3><%= "Created by #{@event.host.name}" %></h3>
-<h4>Attend this event: 
-
-</h4>
-<h3>Attendees:</h3>
-<% @event.attendees.each do |attendee| %>
-	<%= link_to attendee.name, user_path(attendee) %>
-	<br>
+<% if current_user != @event.host && !user_attending?(current_user) %>
+	<h4>Attend this event: 
+	<%= button_to "Attend", { action: "update" }, method: :patch, params: { attendee: current_user.id } %> 
+	</h4>
 <% end %>
+<h3>Attendees:</h3>
+<ul>
+	<% @event.attendees.each do |attendee| %>
+		<li><%= link_to attendee.name, user_path(attendee) %></li>
+	<% end %>
+</ul>
