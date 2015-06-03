@@ -17,11 +17,11 @@ class User < ActiveRecord::Base
 	end
 
 	def upcoming_events
-		attended_events.where(['start_time > ?', DateTime.now])
+		attended_events.where(['start_time > ?', DateTime.now]).order(start_time: :asc)
 	end
 
 	def previous_events
-		attended_events.where(['start_time < ?', DateTime.now])
+		attended_events.where(['start_time < ?', DateTime.now]).order(start_time: :desc)
 	end
 
 

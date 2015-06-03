@@ -14,3 +14,11 @@
 		<%= event.start_time.to_formatted_s(:long) %></li>
 	<% end %>
 </ul>
+
+<h1>Events <%= @user.name %> attended in the past</h1>
+<ul>
+	<% @previous_events.each do |event| %>
+		<li><%= link_to event.name, event_path(event) %> |
+		<%= event.start_time.to_formatted_s(:long) %></li>
+	<% end %>
+</ul>
