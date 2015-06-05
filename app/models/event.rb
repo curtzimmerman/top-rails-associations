@@ -8,8 +8,14 @@ class Event < ActiveRecord::Base
 	scope :past_events, -> { where("start_time < ?", Time.now).order(start_time: :desc) }
 	scope :future_events, -> { where("start_time > ?", Time.now).order(start_time: :asc) }
 
+	after_create :add_host_to_roster
+
 	def add_attendee(user)
 		attendees << user
+	end
+
+	def add_host_to_roster
+		attendees << self.host 
 	end
 
 	#def Event.past
