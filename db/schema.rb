@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150602032955) do
+ActiveRecord::Schema.define(version: 20150603050540) do
 
   create_table "events", force: :cascade do |t|
     t.integer  "host_id"
@@ -21,6 +21,15 @@ ActiveRecord::Schema.define(version: 20150602032955) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.text     "description"
+  end
+
+  create_table "invitations", force: :cascade do |t|
+    t.integer  "host_id"
+    t.integer  "recipient_id"
+    t.integer  "event_id"
+    t.text     "message",      default: "You have been invited to an event"
+    t.datetime "created_at",                                                 null: false
+    t.datetime "updated_at",                                                 null: false
   end
 
   create_table "rosters", force: :cascade do |t|

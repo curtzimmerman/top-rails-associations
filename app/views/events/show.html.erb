@@ -3,10 +3,16 @@
 <h1><%= @event.name %></h1>
 <h2><%= @event.start_time.to_formatted_s(:long) %></h2>
 <h3><%= "Created by #{@event.host.name}" %></h3>
-<% if current_user != @event.host && !user_attending?(current_user) %>
+
+<% if !user_attending?(current_user) %>
 	<h4>Attend this event: 
 	<%= button_to "Attend", { action: "update" }, method: :patch, params: { attendee: current_user.id } %> 
 	</h4>
+<% end %>
+
+<% if current_user == @event.host %>
+	<h4>Invite others to this event</h4>
+	<%= render 'shared/invitation' %>
 <% end %>
 <h3>Attendees:</h3>
 <ul>
